@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sefaz.es.gov.br/duae" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://www.sefaz.es.gov.br/duae" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:include schemaLocation="leiauteDUAe_v1.00.xsd"/>
+  <xs:element name="consValorServico" type="TConsValorServico">
+    <xs:annotation>
+      <xs:documentation>Schema XML de validação do Pedido de Consulta de Valor do Serviço</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

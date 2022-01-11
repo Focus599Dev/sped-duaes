@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="emisDuaCDA_v1" targetNamespace="http://www.sefaz.es.gov.br/duae" elementFormDefault="qualified" attributeFormDefault="unqualified"
+    xmlns="http://www.sefaz.es.gov.br/duae" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="leiauteDUAe_v1.01.xsd" />
+  <xs:element name="emisDuaCda" type="TEmisDuaCdae">
+    <xs:annotation>
+      <xs:documentation>Schema XML de validação do Pedido de Dua de Dívida Ativa Ajuizada</xs:documentation>      
+    </xs:annotation>
+  </xs:element>
+</xs:schema>
