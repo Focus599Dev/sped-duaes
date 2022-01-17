@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sefaz.es.gov.br/duae" targetNamespace="http://www.sefaz.es.gov.br/duae" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:include schemaLocation="tiposBasico_v1.01.xsd"/>
+  <xs:complexType name="TDUAe">
+    <xs:annotation>
+      <xs:documentation>Tipo Documento Único de Arrecadação Eletrônico</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="infDUAe">
+        <xs:annotation>
+          <xs:documentation>Informações do Documento Único de Arrecadação Eletrônico</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="ide">
+              <xs:annotation>
+                <xs:documentation>Identificação do DUA-e</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="nDUA" type="TNumDua"/>
+                  <xs:element name="dEmis" type="xs:dateTime"/>
+                  <xs:element name="cBarra" type="TCodBarra"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="orgao">
+              <xs:annotation>
+                <xs:documentation>Informações do Órgão</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="cnpj" type="TCnpj"/>
+                  <xs:element name="cOrg" type="TCodigoOrgao"/>
+                  <xs:element name="xNome" type="TDescricaoOrgao"/>
+                  <xs:element name="xSigla" type="TSiglaOrgao"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="area">
+              <xs:annotation>
+                <xs:documentation>Informações da Área</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="cArea" type="TCodigoArea"/>
+                  <xs:element name="xNome" type="TDescricaoArea"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="serv">
+              <xs:annotation>
+                <xs:documentation>Informações do Serviço</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="cServ" type="TCodigoServico"/>
+                  <xs:element name="xNome" type="TDescricaoServico"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="rece">
+              <xs:annotation>
+                <xs:documentation>Informações da Receita</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="cRece" type="TCodigoReceita"/>
+                  <xs:element name="vRece" type="TDec_1202"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="contri">
+              <xs:annotation>
+                <xs:documentation>Informações do Contribuinte</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:choice>
+                    <xs:element name="cnpj" type="TCnpj"/>
+                    <xs:element name="cpf" type="TCpf"/>
+                  </xs:choice>
+                  <xs:element name="xNome" type="TRazaoSocial" minOccurs="0"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="data">
+              <xs:annotation>
+                <xs:documentation>Datas do DUA-e</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="dRef" type="TDataRef"/>
+                  <xs:element name="dVen" type="TData"/>
+                  <xs:element name="dPag" type="TData"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="valor">
+              <xs:annotation>
+                <xs:documentation>Valores do DUA-e</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="vMul" type="TDec_1202"/>
+                  <xs:element name="vJur" type="TDec_1202"/>
+                  <xs:element name="vAtu" type="TDec_1202"/>
+                  <xs:element name="vCred" type="TDec_1202"/>
+                  <xs:element name="vTot" type="TDec_1202"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="infComp" type="TInfComp" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>Informações Complementares</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="pgto" type="TPgto">
+              <xs:annotation>
+                <xs:documentation>Informações do Pagamento</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="versao" type="TVerDUAe" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TEmisDuaCdae">
+    <xs:annotation>
+      <xs:documentation>
+        Tipo pedido de emissão de DUA de Dívida Ativa Ajuizada
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tpAmb" type="TAmb">
+        <xs:annotation>
+          <xs:documentation>Identificação do Ambiente: 1 - Produção, 2 - Homologação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cnpjPes" type="TCpfCnpj">
+        <xs:annotation>
+          <xs:documentation>CPF ou CNPJ da pessoa</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nCda" type="TNumCda">
+        <xs:annotation>
+          <xs:documentation>Tipo número da CDA</xs:documentation>          
+        </xs:annotation>        
+      </xs:element>      
+    </xs:sequence>
+    <xs:attribute name="versao" type="TVerDUAe" use="required"/>
+  </xs:complexType>
+  
+  
+  <xs:complexType name="TEmisDUAe">
+    <xs:annotation>
+      <xs:documentation>Tipo pedido de emissão de Documento Único de Arrecadação Eletrônico</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tpAmb" type="TAmb">
+        <xs:annotation>
+          <xs:documentation>Identificação do Ambiente: 1 - Produção, 2 - Homologação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+	  <xs:element name="cnpjEmi" type="TCnpj">
+        <xs:annotation>
+          <xs:documentation>CNPJ do Emissor</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cnpjOrg" type="TCnpj">
+        <xs:annotation>
+          <xs:documentation>CNPJ do órgão</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cArea" type="TCodArea">
+        <xs:annotation>
+          <xs:documentation>Código da área</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cServ" type="TCodServico">
+        <xs:annotation>
+          <xs:documentation>Código do serviço</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cnpjPes" type="TCpfCnpj">
+        <xs:annotation>
+          <xs:documentation>CPF ou CNPJ da pessoa</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dRef" type="TDataRef">
+        <xs:annotation>
+          <xs:documentation>Ano e mês de referência</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dVen" type="TData">
+        <xs:annotation>
+          <xs:documentation>Data de vencimento</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dPag" type="TData">
+        <xs:annotation>
+          <xs:documentation>Data de pagamento</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cMun" type="TCodMunIBGE">
+        <xs:annotation>
+          <xs:documentation>Código do município da tabela do IBGE</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="xInf" type="TInfComp">
+        <xs:annotation>
+          <xs:documentation>Informações Complementares</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="vRec" type="TDec_1202" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Valor da Receita</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="qtde" type="TDec_1004" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Quantidade do Serviço</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="xIde" type="TIde" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Identificador do Contribuinte</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="versao" type="TVerDUAe" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="TRetEmisDUAe">
+    <xs:annotation>
+      <xs:documentation>Tipo Retorno de Pedido de emissão de Documento Único de Arrecadação Eletrônico</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tpAmb" type="TAmb">
+        <xs:annotation>
+          <xs:documentation>Identificação do Ambiente: 1 - Produção, 2 - Homologação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dRet" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Data e hora de retorno no formato AAAA-MM-DDTHH:MM:SS</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nProt" type="TProtocolo">
+        <xs:annotation>
+          <xs:documentation>Número do protocolo da solicitação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="tProc" type="TProcessamento">
+        <xs:annotation>
+          <xs:documentation>Tempo de processamento em milisegundos</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cStat" type="TStat">
+        <xs:annotation>
+          <xs:documentation>Código de status</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="xMotivo" type="TMotivo">
+        <xs:annotation>
+          <xs:documentation>Descrição do status</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dua" type="TDuaResumido">
+        <xs:annotation>
+          <xs:documentation>CPF ou CNPJ da pessoa</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="versao" type="TVerDUAe" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="TConsDUAe">
+    <xs:annotation>
+      <xs:documentation>Tipo Pedido de Consulta de Dua</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tpAmb" type="TAmb">
+        <xs:annotation>
+          <xs:documentation>Identificação do Ambiente: 1 - Produção, 2 - Homologação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nDua" type="TNumDua">
+        <xs:annotation>
+          <xs:documentation>Tipo número do Dua</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:choice>
+        <xs:element name="cpf" type="TCpf">
+          <xs:annotation>
+            <xs:documentation>Tipo número do CPF</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="cnpj" type="TCnpj">
+          <xs:annotation>
+            <xs:documentation>Tipo número do CNPJ</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="versao" type="TVerDUAe" use="required"/>
+  </xs:complexType>
+  
+  <xs:complexType name="TRetConsDUAe">
+    <xs:annotation>
+      <xs:documentation>Tipo Retorno de Pedido de Consulta de Dua</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tpAmb" type="TAmb">
+        <xs:annotation>
+          <xs:documentation>Identificação do Ambiente: 1 - Produção, 2 - Homologação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dRet" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Data e Hora de retorno</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nProt" type="TProtocolo">
+        <xs:annotation>
+          <xs:documentation>Data e Hora de retorno</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="tProc" type="TProcessamento">
+        <xs:annotation>
+          <xs:documentation>Tempo gasto no processamento da requisição (em milisegundos)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cStat" type="TStat">
+        <xs:annotation>
+          <xs:documentation>Código Status da Requisição</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="xMotivo" type="TMotivo">
+        <xs:annotation>
+          <xs:documentation>Descrição do Status da Requisição</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dua" type="TDUAe"/>
+    </xs:sequence>
+    <xs:attribute name="versao" use="required"/>
+  </xs:complexType>
+  
+  
+  
+  <xs:complexType name="TConsAreaServico">
+    <xs:annotation>
+      <xs:documentation>Tipo pedido de consulta de Área e Serviço</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tpAmb" type="TAmb">
+        <xs:annotation>
+          <xs:documentation>Identificação do Ambiente: 1 - Produção, 2 - Homologação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cnpj" type="TCnpj">
+        <xs:annotation>
+          <xs:documentation>Tipo número do CNPJ</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="versao" type="TVerDUAe" use="required"/>
+  </xs:complexType>
+  
+  <xs:complexType name="TConsValorServico">
+    <xs:annotation>
+      <xs:documentation>Tipo pedido de consulta de valor do Serviço</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tpAmb" type="TAmb">
+        <xs:annotation>
+          <xs:documentation>Identificação do Ambiente: 1 - Produção, 2 - Homologação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cnpj" type="TCnpj">
+        <xs:annotation>
+          <xs:documentation>Tipo número do CNPJ</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cArea" type="TCodArea">
+        <xs:annotation>
+          <xs:documentation>Código da área</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cServ" type="TCodServico">
+        <xs:annotation>
+          <xs:documentation>Código do serviço</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="qtde" type="TDec_1004" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Quantidade do Serviço</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="versao" type="TVerDUAe" use="required"/>
+  </xs:complexType>
+  
+  <xs:complexType name="TRetConsValorServico">
+    <xs:annotation>
+      <xs:documentation>Tipo retorno do pedido de consulta do valor do Serviço</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tpAmb" type="TAmb">
+        <xs:annotation>
+          <xs:documentation>Identificação do Ambiente: 1 - Produção, 2 - Homologação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dRet" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Data e Hora de retorno</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nProt" type="TProtocolo">
+        <xs:annotation>
+          <xs:documentation>Data e Hora de retorno</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="tProc" type="TProcessamento">
+        <xs:annotation>
+          <xs:documentation>Tempo gasto no processamento da requisição (em milisegundos)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cStat" type="TStat">
+        <xs:annotation>
+          <xs:documentation>Código Status da Requisição</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="xMotivo" type="TMotivo">
+        <xs:annotation>
+          <xs:documentation>Descrição do Status da Requisição</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="orgao">
+        <xs:annotation>
+          <xs:documentation>Informações do Órgão</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="area">
+              <xs:annotation>
+                <xs:documentation>Informações da Área</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="servico">
+                    <xs:annotation>
+                      <xs:documentation>Informações do Serviço</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                      <xs:attribute name="cod" type="TCodigoServico" use="required">
+                        <xs:annotation>
+                          <xs:documentation>Código do Serviço</xs:documentation>
+                        </xs:annotation>
+                      </xs:attribute>
+                      <xs:attribute name="desc" type="TDescricaoServico" use="required">
+                        <xs:annotation>
+                          <xs:documentation>Descrição do Serviço</xs:documentation>
+                        </xs:annotation>
+                      </xs:attribute>
+                      <xs:attribute name="codReceita" type="TCodigoReceita" use="required">
+                        <xs:annotation>
+                          <xs:documentation>Código de Receita do Serviço</xs:documentation>
+                        </xs:annotation>
+                      </xs:attribute>
+                      <xs:attribute name="valor" type="TDec_1202" use="required">
+                        <xs:annotation>
+                          <xs:documentation>Valor do Serviço</xs:documentation>
+                        </xs:annotation>
+                      </xs:attribute>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+                <xs:attribute name="cod" type="TCodigoArea" use="required">
+                  <xs:annotation>
+                    <xs:documentation>Código da Área</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="desc" type="TDescricaoArea" use="required">
+                  <xs:annotation>
+                    <xs:documentation>Descrição da Área</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="cpnj" type="TCnpj" use="required">
+            <xs:annotation>
+              <xs:documentation>CNPJ do Órgão</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="nome" type="TNomeOrgao" use="required">
+            <xs:annotation>
+              <xs:documentation>Nome do Órgão</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="sigla" type="TSiglaOrgao" use="required">
+            <xs:annotation>
+              <xs:documentation>Sigla do Órgão</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="versao" type="TVerDUAe" use="required"/>
+  </xs:complexType>
+  
+  <xs:complexType name="TRetConsAreaServico">
+    <xs:annotation>
+      <xs:documentation>Tipo retorno do pedido de consulta de Área e Serviço</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tpAmb" type="TAmb">
+        <xs:annotation>
+          <xs:documentation>Identificação do Ambiente: 1 - Produção, 2 - Homologação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dRet" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Data e Hora de retorno</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nProt" type="TProtocolo">
+        <xs:annotation>
+          <xs:documentation>Data e Hora de retorno</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="tProc" type="TProcessamento">
+        <xs:annotation>
+          <xs:documentation>Tempo gasto no processamento da requisição (em milisegundos)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cStat" type="TStat">
+        <xs:annotation>
+          <xs:documentation>Código Status da Requisição</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="xMotivo" type="TMotivo">
+        <xs:annotation>
+          <xs:documentation>Descrição do Status da Requisição</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="orgao" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Informações do Órgão</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="area" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>Informações da Área</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="servico" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                      <xs:documentation>Informações do Serviço</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                      <xs:attribute name="cod" type="TCodigoServico" use="required">
+                        <xs:annotation>
+                          <xs:documentation>Código do Serviço</xs:documentation>
+                        </xs:annotation>
+                      </xs:attribute>
+                      <xs:attribute name="desc" type="TDescricaoServico" use="required">
+                        <xs:annotation>
+                          <xs:documentation>Descrição do Serviço</xs:documentation>
+                        </xs:annotation>
+                      </xs:attribute>
+                      <xs:attribute name="codReceita" type="TCodigoReceita" use="required">
+                        <xs:annotation>
+                          <xs:documentation>Código de Receita do Serviço</xs:documentation>
+                        </xs:annotation>
+                      </xs:attribute>
+                      <xs:attribute name="valor" type="TDec_1202">
+                        <xs:annotation>
+                          <xs:documentation>Valor do Serviço</xs:documentation>
+                        </xs:annotation>
+                      </xs:attribute>   
+                      <xs:attribute name="tipoUnidade" type="TTipoUnidade">
+                        <xs:annotation>
+                          <xs:documentation>Tipo de Unidade</xs:documentation>
+                        </xs:annotation>
+                      </xs:attribute>
+                      <xs:attribute name="flagDecimal" type="TFlagDecimal">
+                        <xs:annotation>
+                          <xs:documentation>Flag Decimal</xs:documentation>
+                        </xs:annotation>
+                      </xs:attribute>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+                <xs:attribute name="cod" type="TCodigoArea" use="required">
+                  <xs:annotation>
+                    <xs:documentation>Código da Área</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="desc" type="TDescricaoArea" use="required">
+                  <xs:annotation>
+                    <xs:documentation>Descrição da Área</xs:documentation>
+                  </xs:annotation>
+                </xs:attribute>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="cpnj" type="TCnpj" use="required">
+            <xs:annotation>
+              <xs:documentation>CNPJ do Órgão</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="nome" type="TNomeOrgao" use="required">
+            <xs:annotation>
+              <xs:documentation>Nome do Órgão</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="sigla" type="TSiglaOrgao" use="required">
+            <xs:annotation>
+              <xs:documentation>Sigla do Órgão</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="versao" type="TVerDUAe" use="required"/>
+  </xs:complexType>
+
+
+  
+  <xs:complexType name="TConsMunicipio">
+    <xs:annotation>
+      <xs:documentation>Tipo pedido de consulta de Município</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tpAmb" type="TAmb">
+        <xs:annotation>
+          <xs:documentation>Identificação do Ambiente: 1 - Produção, 2 - Homologação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="versao" type="TVerDUAe" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="TRetConsMunicipio">
+    <xs:annotation>
+      <xs:documentation>Tipo retorno do pedido de consulta de Município</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tpAmb" type="TAmb">
+        <xs:annotation>
+          <xs:documentation>Identificação do Ambiente: 1 - Produção, 2 - Homologação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dRet" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Data e Hora de retorno</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nProt" type="TProtocolo">
+        <xs:annotation>
+          <xs:documentation>Data e Hora de retorno</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="tProc" type="TProcessamento">
+        <xs:annotation>
+          <xs:documentation>Tempo gasto no processamento da requisição (em milisegundos)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cStat" type="TStat">
+        <xs:annotation>
+          <xs:documentation>Código Status da Requisição</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="xMotivo" type="TMotivo">
+        <xs:annotation>
+          <xs:documentation>Descrição do Status da Requisição</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="municipio" minOccurs="0" maxOccurs="78">
+        <xs:annotation>
+          <xs:documentation>Informações do Município</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:attribute name="cod" type="TCodigoMunicipio" use="required">
+            <xs:annotation>
+              <xs:documentation>Código IBGE do Município</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="desc" type="TDescricaoMunicipio" use="required">
+            <xs:annotation>
+              <xs:documentation>Descrição do Município</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="versao" type="TVerDUAe" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="TObterPdfDUAe">
+    <xs:annotation>
+      <xs:documentation>Tipo Pedido de Obtenção do PDF do Dua</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tpAmb" type="TAmb">
+        <xs:annotation>
+          <xs:documentation>Identificação do Ambiente: 1 - Produção, 2 - Homologação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nDua" type="TNumDua">
+        <xs:annotation>
+          <xs:documentation>Tipo número do Dua</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:choice>
+        <xs:element name="cpf" type="TCpf">
+          <xs:annotation>
+            <xs:documentation>Tipo número do CPF</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="cnpj" type="TCnpj">
+          <xs:annotation>
+            <xs:documentation>Tipo número do CNPJ</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="versao" type="TVerDUAe" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="TRetObterPdfDUAe">
+    <xs:annotation>
+      <xs:documentation>Tipo Retorno do Pedido de Obtenção do PDF do Dua</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="tpAmb" type="TAmb">
+        <xs:annotation>
+          <xs:documentation>Identificação do Ambiente: 1 - Produção, 2 - Homologação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dRet" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Data e Hora de retorno</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nProt" type="TProtocolo">
+        <xs:annotation>
+          <xs:documentation>Data e Hora de retorno</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="tProc" type="TProcessamento">
+        <xs:annotation>
+          <xs:documentation>Tempo gasto no processamento da requisição (em milisegundos)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cStat" type="TStat">
+        <xs:annotation>
+          <xs:documentation>Código Status da Requisição</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="xMotivo" type="TMotivo">
+        <xs:annotation>
+          <xs:documentation>Descrição do Status da Requisição</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="xPdf">
+        <xs:annotation>
+          <xs:documentation>PDF do Dua</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:whiteSpace value="preserve"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="versao" type="TVerDUAe" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="TDuaResumido">
+    <xs:annotation>
+      <xs:documentation>Tipo Dua Resumido</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="nDua" type="TNumDua">
+        <xs:annotation>
+          <xs:documentation>Número do Dua</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dEmi" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Data hora da emissão no formato AAAA-MM-DDTHH:MM:SS</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="vTot" type="TDec_1202">
+        <xs:annotation>
+          <xs:documentation>Valor total do Dua</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nBar" type="TCodBarra">
+        <xs:annotation>
+          <xs:documentation>Número do código de barras</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TPgto">
+    <xs:annotation>
+      <xs:documentation>Tipo Dua Pagamento</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="cPgto" type="TCodPgto">
+        <xs:annotation>
+          <xs:documentation>
+            Código do Pagamento:
+            0: Dua não Pago
+            1: Dua pago mas não consolidado
+            2: Dua pago e consolidado
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dAut" type="TData" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Data da Autenticação do Pagamento</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cAge" type="TCodAge" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Código da Agência Autenticadora</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cAut" type="TCodAut" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Código da Autenticação</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="fPgto" type="TForPgto" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Forma do Pagamento:
+            C: cheque
+            D: dinheiro
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="tCap" type="TTipCap" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Tipo de Captura:
+            1: Boca do caixa
+            2: Arrecadação eletrônica
+            3: Internet c/ fatura
+            4: Outros meios c/ fatura
+            5: Corresp. c/ fatura
+            6: Telefone c/ fatura
+            A: Boca do caixa s/ fatura
+            B: Arrecadação eletrônica s/ fatura
+            C: Internet s/ fatura
+            D: Corresp. s/ fatura
+            E: Telefone s/ fatura
+            F: Outros meios s/ fatura
+            N: Transação normal
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cBan" type="TCodBanco" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Código do Banco</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="TVerDUAe">
+    <xs:annotation>
+      <xs:documentation>Tipo Versão do DUA-e v1.00</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve"/>
+      <xs:pattern value="1\.01"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

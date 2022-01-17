@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <UF>
+        <sigla>ES</sigla>
+        <homologacao>
+            <duaEmissao method="duaEmissao" operation="duaEmissao" version="1.00">https://homologacao.sefaz.es.gov.br/WsDua/duaservice.asmx</duaEmissao>
+			<duaConsulta method="duaConsulta" operation="duaConsulta" version="1.00">https://homologacao.sefaz.es.gov.br/WsDua/duaservice.asmx</duaConsulta>
+			<duaObterPdf method="duaObterPdf" operation="duaObterPdf" version="1.00">https://homologacao.sefaz.es.gov.br/WsDua/duaservice.asmx</duaObterPdf>
+			<duaConsultaAreaServico method="duaConsultaAreaServico" operation="duaConsultaAreaServico" version="1.00">https://homologacao.sefaz.es.gov.br/WsDua/duaservice.asmx</duaConsultaAreaServico>
+        </homologacao>
+        <producao>
+			<duaEmissao method="duaEmissao" operation="duaEmissao" version="1.00">https://app.sefaz.es.gov.br/WsDua/duaservice.asmx</duaEmissao>
+			<duaConsulta method="duaConsulta" operation="duaConsulta" version="1.00">https://app.sefaz.es.gov.br/WsDua/duaservice.asmx</duaConsulta>
+			<duaObterPdf method="duaObterPdf" operation="duaObterPdf" version="1.00">https://app.sefaz.es.gov.br/WsDua/duaservice.asmx</duaObterPdf>
+			<duaConsultaAreaServico method="duaConsultaAreaServico" operation="duaConsultaAreaServico" version="1.00">https://app.sefaz.es.gov.br/WsDua/duaservice.asmx</duaConsultaAreaServico>
+        </producao>
+    </UF>
+</WS>
